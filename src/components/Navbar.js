@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   height: 60px;
@@ -15,13 +17,13 @@ const Wrapper = styled.div`
 `;
 
 const Left = styled.div`
-  flex: 1;
+  flex: 2;
   display: flex;
   align-items: center;
 `;
 
 const Center = styled.div`
-  flex: 1;
+  flex: 0;
   align-items: center;
   text-align: center;
 `;
@@ -39,23 +41,39 @@ const Right = styled.div`
   ${mobile({ flex: 2, justifyContent: "center" })}
 `;
 const MenuItem = styled.div`
-  font-size: 14px;
+  font-size: 18px;
   cursor: pointer;
   margin-left: 25px;
+  color: black;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
 const Navbar = () => {
+  const user = useSelector((state) => state.user.currentUser);
+
+  console.log(user);
   return (
     <Container>
       <Wrapper>
-        <Left></Left>
-        <Center>
+        <Left>
           <Logo>C Learning</Logo>
-        </Center>
+        </Left>
+        <Center></Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          {!user ? (
+            <>
+              <Link style={{ textDecoration: "none" }} to="/register">
+                <MenuItem renderAs="button">REGISTER</MenuItem>
+              </Link>
+              <Link style={{ textDecoration: "none" }} to="/login">
+                <MenuItem>SIGN IN</MenuItem>
+              </Link>
+            </>
+          ) : (
+            <Link style={{ textDecoration: "none" }} to="/">
+              <MenuItem>Logout</MenuItem>
+            </Link>
+          )}
         </Right>
       </Wrapper>
     </Container>

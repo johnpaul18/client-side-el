@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useHistory } from "react-router";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100vw;
@@ -49,17 +51,54 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const history = useHistory();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      username: e.target.username.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      passwordConfirm: e.target.passwordConfirm.value,
+    };
+
+    axios
+      .post("http://localhost:8000/api/v1/auth/register", data)
+      .then((res) => {
+        console.log(res.data);
+        history.push("/login");
+      });
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
-        <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
+        <Form onSubmit={onSubmit}>
+          <Input
+            name="firstName"
+            type="text"
+            placeholder="first name"
+            required
+          />
+          <Input name="lastName" type="text" placeholder="last name" required />
+          <Input name="username" type="text" placeholder="username" required />
+          <Input name="email" type="email" placeholder="email" required />
+          <Input
+            name="password"
+            type="password"
+            placeholder="password"
+            required
+          />
+          <Input
+            name="passwordConfirm"
+            type="password"
+            placeholder="confirm password"
+            required
+          />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
