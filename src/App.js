@@ -2,6 +2,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useSelector } from "react-redux";
+import Map from "./pages/Map";
 
 import {
   BrowserRouter as Router,
@@ -16,6 +17,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/map" exact component={Map} />
         <Route path="/login" exact>
           {user ? <Redirect to="/" /> : <Login />}
         </Route>

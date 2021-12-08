@@ -1,5 +1,7 @@
 import Navbar from "../components/Navbar";
-import Graph from "../components/Graph";
+import Profile from "../components/Profile";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
 
 const originalElements = {
   nodes: [
@@ -15,12 +17,17 @@ const originalElements = {
   ],
 };
 
+const Container = styled.div`
+  min-height: 100vh;
+  background-color: #4f686d;
+`;
 const Home = () => {
+  const user = useSelector((state) => state.user.currentUser);
   return (
-    <div>
-      <Navbar />
-      <Graph elements={originalElements} />
-    </div>
+    <Container>
+      {user ? <Profile /> : <Navbar />}
+      {/* <Graph elements={originalElements} /> */}
+    </Container>
   );
 };
 

@@ -2,21 +2,18 @@ import * as React from "react";
 import cytoscape from "cytoscape";
 import cyCanvas from "cytoscape-canvas";
 import styled from "styled-components";
-import Map from "./../img/map.png";
-
-import style from "./style";
 
 cyCanvas(cytoscape);
-
 const Container = styled.div`
-  width: 600px;
-  height: 900px;
+  width: 100vw;
+  height: 100vh;
+  background-color: #546d73;
+  z-index: 2;
 `;
 
-const Graph = ({ elements }) => {
+const Graph = ({ elements, map }) => {
   const container = React.useRef(null);
   const graph = React.useRef(cytoscape.Core);
-  const layout = React.useRef(cytoscape.Layouts);
 
   const background = new Image();
   background.onload = () => {
@@ -43,18 +40,18 @@ const Graph = ({ elements }) => {
           name: "preset",
         },
         container: container.current,
+        maxZoom: 3,
       });
 
-      graph.current.userPanningEnabled(false);
-      graph.current.$("#q1").position({ x: 375, y: 410 });
-      graph.current.$("#q1").position({ x: 375, y: 410 });
+      // graph.current.$("#q1").position({ x: 375, y: 410 });
+      console.log(graph.current);
+      graph.current.userPanningEnabled(true);
       graph.current.autolock(false);
       graph.current.on("tap", "node", function (evt) {
         var node = evt.target;
         console.log("tapped " + node.id());
+        console.log(node.position(), 1);
       });
-
-      console.log(graph.current.$("#q1").position());
 
       const bottomLayer = graph.current.cyCanvas({
         zIndex: -1,
@@ -75,7 +72,7 @@ const Graph = ({ elements }) => {
         // Draw text that follows the model
         ctx.font = "24px Helvetica";
         ctx.fillStyle = "black";
-        ctx.fillText("This text follows the model", 200, 300);
+        // ctx.fillText("This text follows the model", 200, 300);
 
         // Draw shadows under nodes
         ctx.shadowColor = "black";
@@ -100,9 +97,10 @@ const Graph = ({ elements }) => {
     }
   };
 
-  background.src = Map;
+  background.src = map;
+  background.color = "black";
 
-  return <Container className="graph" ref={container} />;
+  return <Container ref={container} />;
 };
 
 export default Graph;

@@ -2,6 +2,12 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useHistory } from "react-router";
 import axios from "axios";
+import signupBg from "./../img/signup.png";
+import inputBg from "./../img/input.png";
+import signupBtn from "./../img/arrow.png";
+import ButtonWithBg from "../components/ButtonWithBg";
+import InputWithBg from "../components/InputWithBg";
+import FormWithBg from "../components/FormWithBg";
 
 const Container = styled.div`
   width: 100vw;
@@ -18,9 +24,8 @@ const Container = styled.div`
   justify-content: center;
 `;
 const Wrapper = styled.div`
-  padding: 20px;
-  width: 40%;
-  background-color: white;
+  padding: 30px;
+  width: 60%;
   ${mobile({ width: "75%" })}
 `;
 const Title = styled.h1`
@@ -30,24 +35,56 @@ const Title = styled.h1`
 const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
 `;
 const Input = styled.input`
-  flex: 1;
-  min-width: 40%;
-  margin: 20px 10px 0px 0px;
+  width: 70%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  text-shadow: -1px -1px 0 #fdc005, 1px -1px 0 #fdc005, -1px 1px 0 #fdc005,
+    1px 1px 0 #fdc005;
+  color: #ab4235;
+  font-size: 26px;
+  font-weight: 900;
+  text-align: center;
+  z-index: 2;
+`;
+
+const InputWrapper = styled.div`
+  background-image: url(${inputBg});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 50%;
+  margin: 15px;
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
 `;
 const Agreement = styled.span`
   font-size: 12px;
   margin: 20px 0px;
 `;
 const Button = styled.button`
-  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 80px;
   border: none;
   padding: 15px 20px;
-  background-color: black;
-  color: white;
   cursor: pointer;
+  text-shadow: -1px -1px 0 #fdc005, 1px -1px 0 #fdc005, -1px 1px 0 #fdc005,
+    1px 1px 0 #fdc005;
+  color: #ab4235;
+  font-size: 36px;
+  font-weight: 700;
+  background-color: transparent;
 `;
 
 const Register = () => {
@@ -75,37 +112,62 @@ const Register = () => {
 
   return (
     <Container>
-      <Wrapper>
-        <Title>CREATE AN ACCOUNT</Title>
+      <FormWithBg image={signupBg}>
+        {/* <Title>CREATE AN ACCOUNT</Title> */}
         <Form onSubmit={onSubmit}>
-          <Input
-            name="firstName"
-            type="text"
-            placeholder="first name"
-            required
-          />
-          <Input name="lastName" type="text" placeholder="last name" required />
-          <Input name="username" type="text" placeholder="username" required />
-          <Input name="email" type="email" placeholder="email" required />
-          <Input
-            name="password"
-            type="password"
-            placeholder="password"
-            required
-          />
-          <Input
-            name="passwordConfirm"
-            type="password"
-            placeholder="confirm password"
-            required
-          />
+          <InputWithBg image={inputBg}>
+            <Input
+              name="firstName"
+              type="text"
+              placeholder="first name"
+              required
+            />
+          </InputWithBg>
+          <InputWithBg image={inputBg}>
+            <Input
+              name="lastName"
+              type="text"
+              placeholder="last name"
+              required
+            />
+          </InputWithBg>
+          <InputWithBg image={inputBg}>
+            <Input
+              name="username"
+              type="text"
+              placeholder="username"
+              required
+            />
+          </InputWithBg>
+          <InputWithBg image={inputBg}>
+            <Input name="email" type="email" placeholder="email" required />
+          </InputWithBg>
+          <InputWithBg image={inputBg}>
+            <Input
+              name="password"
+              type="password"
+              placeholder="password"
+              required
+            />
+          </InputWithBg>
+          <InputWithBg image={inputBg}>
+            <Input
+              name="passwordConfirm"
+              type="password"
+              placeholder="confirm password"
+              required
+            />
+          </InputWithBg>
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+
+          <Button style={{ width: "100%" }}>
+            <ButtonWithBg image={signupBtn} label="CREATE" left={true} />
+          </Button>
         </Form>
-      </Wrapper>
+      </FormWithBg>
     </Container>
   );
 };

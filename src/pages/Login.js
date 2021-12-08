@@ -4,6 +4,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/apiCalls";
 import { useSelector } from "react-redux";
+import FormWithBg from "../components/FormWithBg";
+import SigninBg from "./../img/signup.png";
+import InputWithBg from "../components/InputWithBg";
+import inputBg from "./../img/input.png";
+import ButtonWithBg from "../components/ButtonWithBg";
+import signinBtn from "./../img/arrow.png";
 
 const Container = styled.div`
   width: 100vw;
@@ -32,13 +38,20 @@ const Title = styled.h1`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  z-index: 2;
 `;
 const Input = styled.input`
-  flex: 1;
-  min-width: 40%;
-  margin: 10px 0px;
-  padding: 10px;
-  font-size: 24px;
+  width: 70%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  text-shadow: -1px -1px 0 #fdc005, 1px -1px 0 #fdc005, -1px 1px 0 #fdc005,
+    1px 1px 0 #fdc005;
+  color: #ab4235;
+  font-size: 26px;
+  font-weight: 900;
+  text-align: center;
+  z-index: 2;
 `;
 const Link = styled.a`
   margin: 5px 0px;
@@ -48,13 +61,12 @@ const Link = styled.a`
   cursor: pointer;
 `;
 const Button = styled.button`
-  width: 40%;
   border: none;
-  padding: 15px 20px;
-  background-color: black;
-  color: white;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  margin-bottom: 10px;
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -77,25 +89,29 @@ const Login = () => {
 
   return (
     <Container>
-      <Wrapper>
-        <Title>SIGN IN</Title>
+      <FormWithBg image={SigninBg}>
+        {/* <Title>SIGN IN</Title> */}
         <Form onSubmit={onSubmit}>
-          <Input
-            placeholder="username"
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <Input
-            placeholder="password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <InputWithBg image={inputBg}>
+            <Input
+              placeholder="username"
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </InputWithBg>
+          <InputWithBg image={inputBg}>
+            <Input
+              placeholder="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </InputWithBg>
           <Button type="submit" disabled={isFetching}>
-            LOGIN
+            <ButtonWithBg image={signinBtn} label="SIGN IN" left={true} />
           </Button>
           <Link color={forgotColor}>DO NOT REMEMBER THE PASSWORD?</Link>
         </Form>
-      </Wrapper>
+      </FormWithBg>
     </Container>
   );
 };
