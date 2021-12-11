@@ -8,16 +8,12 @@ import signupBtn from "./../img/arrow.png";
 import ButtonWithBg from "../components/ButtonWithBg";
 import InputWithBg from "../components/InputWithBg";
 import FormWithBg from "../components/FormWithBg";
+import { publicRequest } from "./../requestMethods";
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
-      center;
+  background: #546d73;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -102,12 +98,13 @@ const Register = () => {
       passwordConfirm: e.target.passwordConfirm.value,
     };
 
-    axios
-      .post("http://localhost:8000/api/v1/auth/register", data)
+    publicRequest
+      .post("auth/register", data)
       .then((res) => {
         console.log(res.data);
         history.push("/login");
-      });
+      })
+      .catch((e) => {});
   };
 
   return (

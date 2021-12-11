@@ -14,12 +14,7 @@ import signinBtn from "./../img/arrow.png";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
-      center;
+  background: #546d73;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -56,8 +51,9 @@ const Input = styled.input`
 const Link = styled.a`
   margin: 5px 0px;
   font-size: 14px;
-  color: ${(props) => props.color};
+  color: white;
   text-decoration: underline;
+  text-align: center;
   cursor: pointer;
 `;
 const Button = styled.button`
@@ -74,7 +70,7 @@ const Button = styled.button`
 `;
 
 const Login = () => {
-  const [forgotColor, setForgotColor] = useState("black");
+  const [forgotColor, setForgotColor] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -84,7 +80,7 @@ const Login = () => {
     e.preventDefault();
     login(dispatch, { username, password });
 
-    error && setForgotColor("red");
+    error && setForgotColor(true);
   };
 
   return (
@@ -102,6 +98,7 @@ const Login = () => {
           <InputWithBg image={inputBg}>
             <Input
               placeholder="password"
+              type="password"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -109,7 +106,7 @@ const Login = () => {
           <Button type="submit" disabled={isFetching}>
             <ButtonWithBg image={signinBtn} label="SIGN IN" left={true} />
           </Button>
-          <Link color={forgotColor}>DO NOT REMEMBER THE PASSWORD?</Link>
+          {forgotColor && <Link>DO NOT REMEMBER THE PASSWORD?</Link>}
         </Form>
       </FormWithBg>
     </Container>

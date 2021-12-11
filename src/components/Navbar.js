@@ -31,15 +31,11 @@ const Center = styled.div`
   align-items: center;
   text-align: center;
 `;
-const Logo = styled.div`
+const Logo = styled.img`
   font-weight: bold;
-  background-image: url(${(props) => props.img});
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  width: auto;
   height: 100%;
-  width: 300px;
-  ${mobile({ fontSize: "24px" })};
+  max-width: 200px;
 `;
 
 const Right = styled.div`
@@ -82,7 +78,7 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Logo img={logo} />
+          <Logo src={logo} />
         </Left>
         <Center></Center>
         <Right>

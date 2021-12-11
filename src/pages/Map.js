@@ -5,9 +5,9 @@ import map from "./../img/map3.png";
 const originalElements = {
   nodes: [
     { data: { id: "q1", name: "Introduction" }, position: { x: 243, y: 382 } },
-    { data: { id: "q2", name: "Module1" }, position: { x: 259, y: 327 } },
-    { data: { id: "q3", name: "Module2" }, position: { x: 181, y: 337 } },
-    { data: { id: "q4", name: "Module3" }, position: { x: 259, y: 272 } },
+    { data: { id: "q2", name: "Conditional" }, position: { x: 259, y: 327 } },
+    { data: { id: "q3", name: "Loops" }, position: { x: 181, y: 337 } },
+    { data: { id: "q4", name: "Functions" }, position: { x: 259, y: 272 } },
   ],
   edges: [
     { data: { source: "q1", target: "q2" } },

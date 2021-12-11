@@ -2,6 +2,7 @@ import * as React from "react";
 import cytoscape from "cytoscape";
 import cyCanvas from "cytoscape-canvas";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 cyCanvas(cytoscape);
 const Container = styled.div`
@@ -12,6 +13,7 @@ const Container = styled.div`
 `;
 
 const Graph = ({ elements, map }) => {
+  const history = useHistory();
   const container = React.useRef(null);
   const graph = React.useRef(cytoscape.Core);
 
@@ -25,7 +27,12 @@ const Graph = ({ elements, map }) => {
             selector: "node",
             css: {
               label: "data(name)",
-              backgroundColor: "red",
+              backgroundColor: "white",
+              color: "white",
+              "border-width": "3px",
+              "border-color": "orange",
+              width: "15px",
+              height: "15px",
             },
           },
           {
@@ -49,8 +56,9 @@ const Graph = ({ elements, map }) => {
       graph.current.autolock(false);
       graph.current.on("tap", "node", function (evt) {
         var node = evt.target;
-        console.log("tapped " + node.id());
+        console.log("tapped " + node);
         console.log(node.position(), 1);
+        history.push(`/lesson/${node.id()}`);
       });
 
       const bottomLayer = graph.current.cyCanvas({
