@@ -5,9 +5,9 @@ import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import signupBg from "./../img/signup.png";
-import loginBg from "./../img/signin.png";
 import logo from "./../img/logo.png";
 import ButtonWithBg from "./ButtonWithBg";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
   ${mobile({ height: "50px" })}
@@ -58,20 +58,9 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })};
 `;
 
-const MenuBg = styled.div`
-  background-image: url(${(props) => props.bg});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 200px;
-  width: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Navbar = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const history = useHistory();
 
   console.log(user);
   return (
@@ -84,12 +73,16 @@ const Navbar = () => {
         <Right>
           {!user ? (
             <>
-              <Link style={{ textDecoration: "none" }} to="/register">
-                <ButtonWithBg image={signupBg} label={"SIGNUP"} />
-              </Link>
-              <Link style={{ textDecoration: "none" }} to="/login">
-                <ButtonWithBg image={loginBg} label={"SIGNIN"} />
-              </Link>
+              <ButtonWithBg
+                image={signupBg}
+                label={"SIGNUP"}
+                click={() => history.push("/register")}
+              />
+              <ButtonWithBg
+                image={signupBg}
+                label={"SIGNIN"}
+                click={() => history.push("/login")}
+              />
             </>
           ) : (
             <Link style={{ textDecoration: "none" }} to="/">

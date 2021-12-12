@@ -15,7 +15,11 @@ const ButtonContainer = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
-  ${mobile({ height: "100px", width: "100px" })}
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  ${mobile({ height: "100px", width: "90%" })}
 `;
 const ButtonImage = styled.img`
   position: absolute;
@@ -30,6 +34,12 @@ const ButtonName = styled.span`
   font-weight: 700;
   z-index: 2;
   margin-left: ${(props) => (props.left ? "15px" : 0)};
+  ${mobile({
+    fontSize: "16px",
+    fontWeight: 700,
+    width: "100%",
+    textAlign: "center",
+  })}
 `;
 
 function ButtonWithBg({ image, label, left = false, click }) {

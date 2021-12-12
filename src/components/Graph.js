@@ -3,6 +3,7 @@ import cytoscape from "cytoscape";
 import cyCanvas from "cytoscape-canvas";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 cyCanvas(cytoscape);
 const Container = styled.div`
@@ -12,10 +13,11 @@ const Container = styled.div`
   z-index: 2;
 `;
 
-const Graph = ({ elements, map }) => {
+const Graph = ({ map }) => {
   const history = useHistory();
   const container = React.useRef(null);
   const graph = React.useRef(cytoscape.Core);
+  let elements = useSelector((state) => state.element.data);
 
   const background = new Image();
   background.onload = () => {
